@@ -30,7 +30,8 @@ class IndexUser(Resource):
                 'name': food.name,
                 'category': food.category,
                 'price':food.price,
-                'ingredients': food.ingredients
+                'description': food.description,
+                'image': food.image,
             }
             foods.append(food_dict)
         resp = make_response(jsonify(foods), 200)
@@ -75,12 +76,12 @@ class OrderByIdAdmin(Resource):
      
 api.add_resource(IndexUser, '/foods')
 api.add_resource(FoodByIdUser, '/foods/<int:id>')
-api.add_resource(FoodByIdCategoryUser, '/foods/<str:category>')
+api.add_resource(FoodByIdCategoryUser, '/foods/<string:category>')
 api.add_resource(OrdersUser, '/orders')
 api.add_resource(OrderByIDUser, '/orders/<int:id>')
 api.add_resource(IndexAdmin, '/admin/foods')
 api.add_resource(FoodByIdAdmin, '/admin/foods/<int:id>')
-api.add_resource(FoodByIdCategoryAdmin, '/admin/foods/<str:category>')
+api.add_resource(FoodByIdCategoryAdmin, '/admin/foods/<string:category>')
 api.add_resource(AllOrdersAdmin, '/admin/orders')
 api.add_resource(OrderByIdAdmin, '/admin/orders/<int:id>')
 

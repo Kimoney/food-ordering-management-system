@@ -39,7 +39,18 @@ class IndexUser(Resource):
      
 class FoodByIdUser(Resource):
 # View one food as the user
-    pass
+    def get(self, id):
+        food = Food.query.filter(Food.id == id).first()
+        food_dict = {
+                'id':food.id,
+                'name': food.name,
+                'category': food.category,
+                'price':food.price,
+                'description': food.description,
+                'image': food.image,
+            }
+        resp = make_response(jsonify(food_dict), 200)
+        return resp
 
 class FoodByIdCategoryUser(Resource):
 # View several foods based on their category as the user

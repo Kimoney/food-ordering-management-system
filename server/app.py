@@ -100,11 +100,51 @@ class FoodByIdCategoryAdmin(Resource):
 
 class AllOrdersAdmin(Resource):
 # Shows all orders as the Admin and handles all CRUD operations
-    pass
+    def get(self):
+        try:
+            orders = []
+            for order in Order.query.all():
+                order_dict = order.to_dict()
+                orders.append(order_dict)
+                
+            if orders:
+                return jsonify({'message':'success','data':orders}),200
+            else:
+                return jsonify({'message':'No orders found'}),404
+        except Exception as e:
+            return jsonify({'message':'An error occured', 'error':str(e)}),500
+        
+    def post(self):
+        new_order=Order(
+            quantity=request.form['quantity'],
+            delivery_status=request.form['delivery_status'],
+            price=request.form['price'],
+            user_id=request.form['user_id'],
+            food_id=request.form['food_id'],
+        )
+        db.session.add(new_order)
+        db.session.commit()
+        return jsonify(new_order.to_dict()),201
 
 class OrderByIdAdmin(Resource):
-# Shoe a single order as the Admin and handles all CRUD operations
-    pass
+# Show a single order as the Admin and handles all CRUD operations
+    def get(self,id):
+        order_dict=Order.query.filter_by(id=id).first().to_dict()
+        return jsonify(order_dict),200
+    def patch(self,id):
+        order_to_update=Order.query.filter_by(id=id).first()
+        for attr in request.form:
+            setattr(order_to_update,attr,request.form[attr])
+            
+        db.session.add(order_to_update)
+        db.session.commit()
+        return jsonify(order_to_update.to_dict()),200
+    
+    def delete(self,id):
+        order_to_delete=Order.query.filter_by(id=id).first()
+        db.session.delete(order_to_delete)
+        db.session.commit()
+        return jsonify({'message':'order successfully deleted'}),200
 
      
 api.add_resource(IndexUser, '/foods')

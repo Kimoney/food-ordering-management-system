@@ -32,7 +32,7 @@ with app.app_context():
         db.session.commit()
     print('Populated Food table')
     
-    # Populate restaurantspizzas table
+    # Populate Order table
     for x in range (100):
         order = Order(quantity=fake.random_digit_not_null(), user_id=fake.random_int(min=1, max=10), food_id=fake.random_int(min=1, max=25))
         db.session.add(order)

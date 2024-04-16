@@ -44,7 +44,11 @@ class FoodByIdCategoryUser(Resource):
 # View several foods based on their category as the user
     pass
 
-class MyOrders(Resource):
+class OrdersUser(Resource):
+# Orders a single user has placed
+    pass
+
+class OrderByIDUser(Resource):
 # Orders a single user has placed
     pass
 
@@ -69,7 +73,17 @@ class OrderByIdAdmin(Resource):
     pass
 
      
-api.add_resource(IndexUser, '/home')
+api.add_resource(IndexUser, '/foods')
+api.add_resource(FoodByIdUser, '/foods/<int:id>')
+api.add_resource(FoodByIdCategoryUser, '/foods/<str:category>')
+api.add_resource(OrdersUser, '/orders')
+api.add_resource(OrderByIDUser, '/orders/<int:id>')
+api.add_resource(IndexAdmin, '/admin/foods')
+api.add_resource(FoodByIdAdmin, '/admin/foods/<int:id>')
+api.add_resource(FoodByIdCategoryAdmin, '/admin/foods/<str:category>')
+api.add_resource(AllOrdersAdmin, '/admin/orders')
+api.add_resource(OrderByIdAdmin, '/admin/orders/<int:id>')
+
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

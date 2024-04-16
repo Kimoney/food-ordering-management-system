@@ -22,35 +22,29 @@ def index():
     return resp
 class IndexUser(Resource):
 # View all foods for the user's home/index page
-     def get(self):
-        foods = []
-        for food in Food.query.all():
-            food_dict = {
-                'id':food.id,
-                'name': food.name,
-                'category': food.category,
-                'price':food.price,
-                'description': food.description,
-                'image': food.image,
-            }
-            foods.append(food_dict)
-        resp = make_response(jsonify(foods), 200)
-        return resp
+    def get(self):
+        try:
+            foods = []
+            for food in Food.query.all():
+                food_dict = food.to_dict()
+                foods.append(food_dict)
+                
+            if foods:
+                return jsonify({'message':'success','data':foods}),200
+            else:
+                return jsonify({'message':'No foods found'}),404
+        except Exception as e:
+            return jsonify({'message':'An error occured', 'error':str(e)}),500
      
 class FoodByIdUser(Resource):
 # View one food as the user
     def get(self, id):
         food = Food.query.filter(Food.id == id).first()
-        food_dict = {
-                'id':food.id,
-                'name': food.name,
-                'category': food.category,
-                'price':food.price,
-                'description': food.description,
-                'image': food.image,
-            }
-        resp = make_response(jsonify(food_dict), 200)
-        return resp
+        food_dict = food.to_dict()
+        if food is None:
+            return jsonify({'message':'The requested {food.id} does not exist'}),404
+        else:
+            return jsonify(food_dict),200
 
 class FoodByIdCategoryUser(Resource):
 # View several foods based on their category as the user

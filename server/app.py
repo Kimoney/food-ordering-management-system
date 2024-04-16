@@ -60,8 +60,20 @@ class OrderByIDUser(Resource):
 
 class IndexAdmin(Resource):
 # View All food as the Admin and perform all CRUD operations
-    pass
-
+    def get(self):
+        food_list=[f.to_dict() for f in Food.query.all()]
+        return jsonify(food_list),200
+    def post(self):
+        new_food=Food(
+            name=request.form['name'],
+            category=request.form['category'],
+            price=request.form['price'],
+            description=request.form['description'],
+            image=request.form['image'],
+        )
+        db.session.add(new_food)
+        db.session.commit()
+        return jsonify(new_food.to_dict()),201
 class FoodByIdAdmin(Resource):
 # View one food as as the Admin and perform all CRUD operations
     pass

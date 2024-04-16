@@ -76,7 +76,23 @@ class IndexAdmin(Resource):
         return jsonify(new_food.to_dict()),201
 class FoodByIdAdmin(Resource):
 # View one food as as the Admin and perform all CRUD operations
-    pass
+    def get(self,id):
+        food_dict=Food.query.filter_by(id=id).first().to_dict()
+        return jsonify(food_dict),200
+    def patch(self,id):
+        food_to_update=Food.query.filter_by(id=id).first()
+        for attr in request.form:
+            setattr(food_to_update,attr,request.form[attr])
+            
+        db.session.add(food_to_update)
+        db.session.commit()
+        return jsonify(food_to_update.to_dict()),200
+    
+    def delete(self,id):
+        food_to_delete=Food.query.filter_by(id=id).first()
+        db.session.delete(food_to_delete)
+        db.session.commit()
+        return jsonify({'message':'food successfully deleted'}),200
 
 class FoodByIdCategoryAdmin(Resource):
 # View several foods based on their category as the Admin and handles all CRUD operations

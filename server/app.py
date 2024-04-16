@@ -36,6 +36,38 @@ class IndexUser(Resource):
         resp = make_response(jsonify(foods), 200)
         return resp
      
+class FoodByIdUser(Resource):
+# View one food as the user
+    pass
+
+class FoodByIdCategoryUser(Resource):
+# View several foods based on their category as the user
+    pass
+
+class MyOrders(Resource):
+# Orders a single user has placed
+    pass
+
+class IndexAdmin(Resource):
+# View All food as the Admin and perform all CRUD operations
+    pass
+
+class FoodByIdAdmin(Resource):
+# View one food as as the Admin and perform all CRUD operations
+    pass
+
+class FoodByIdCategoryAdmin(Resource):
+# View several foods based on their category as the Admin and handles all CRUD operations
+    pass
+
+class AllOrdersAdmin(Resource):
+# Shows all orders as the Admin and handles all CRUD operations
+    pass
+
+class OrderByIdAdmin(Resource):
+# Shoe a single order as the Admin and handles all CRUD operations
+    pass
+
      
 api.add_resource(IndexUser, '/home')
 

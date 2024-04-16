@@ -35,7 +35,7 @@ class IndexUser(Resource):
                 return jsonify({'message':'No foods found'}),404
         except Exception as e:
             return jsonify({'message':'An error occured', 'error':str(e)}),500
-     
+    
 class FoodByIdUser(Resource):
 # View one food as the user
     def get(self, id):
@@ -70,8 +70,9 @@ class OrdersUser(Resource):
 
 class OrderByIDUser(Resource):
 # Orders a single user has placed
-    pass
-
+    def get(self, user_id):
+        orders = Order.query.filter_by(user_id=user_id).order_by(Order.id.asc()).all()
+        return jsonify({'orders': [order.to_dict() for order in orders]}), 200
 class IndexAdmin(Resource):
 # View All food as the Admin and perform all CRUD operations
     def get(self):

@@ -48,7 +48,21 @@ class FoodByIdUser(Resource):
 
 class FoodByIdCategoryUser(Resource):
 # View several foods based on their category as the user
-    pass
+    def get(self, category):
+        # Get the current user from the Flask request context
+        user = getattr(request, 'user', None)
+        if not user:
+            return {'error': 'Unauthorized'}, 401
+
+        # Get the category of food to view
+        foods = Food.query.filter_by(category=category).all()
+
+        # Filter the foods based on the user's orders
+        user_orders = Order.query.filter_by(user_id=user.id).all()
+        foods = [food for food in foods if any(order.food_id == food.id for order in user_orders)]
+        # Convert the foods to a list of dictionaries
+        foods_dict = [food.to_dict() for food in foods]
+        return jsonify(foods_dict), 200
 
 class OrdersUser(Resource):
 # Orders a single user has placed
@@ -146,7 +160,7 @@ class OrderByIdAdmin(Resource):
         db.session.commit()
         return jsonify({'message':'order successfully deleted'}),200
 
-     
+    
 api.add_resource(IndexUser, '/foods')
 api.add_resource(FoodByIdUser, '/foods/<int:id>')
 api.add_resource(FoodByIdCategoryUser, '/foods/<string:category>')

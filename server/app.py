@@ -61,22 +61,22 @@ class FoodByIdUser(Resource):
 class FoodByIdCategoryUser(Resource):
     # View several foods based on their category as the user
     def get(self, category):
-        user = getattr(request, 'user', None)
-        if not user:
-            return {'error': 'Unauthorized'}, 401
-
+        # Retrieve foods based on category
         foods = Food.query.filter_by(category=category).all()
-        user_orders = Order.query.filter_by(user_id=user.id).all()
-        foods = [food for food in foods if any(order.food_id == food.id for order in user_orders)]
-        foods_dict = [{
-            'id': food.id,
-            'name': food.name,
-            'category': food.category,
-            'price': food.price,
-            'description': food.description,
-            'image': food.image
-        } for food in foods]
-        return make_response(jsonify(foods_dict), 200)
+        if not foods:
+            return {'message': 'No foods found in this category'}, 404
+        food_list = []
+        for food in foods:
+            food_data = {
+                'id': food.id,
+                'name': food.name,
+                'category': food.category,
+                'price': food.price,
+                'description': food.description,
+                'image': food.image
+            }
+            food_list.append(food_data)
+        return {'foods': food_list}, 200
 
 class OrdersUser(Resource):
     # Orders a single user has placed

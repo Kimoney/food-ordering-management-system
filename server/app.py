@@ -80,7 +80,23 @@ class FoodByIdCategoryUser(Resource):
 
 class OrdersUser(Resource):
     # Orders a single user has placed
-    pass
+    def get(self, user_id):
+        # Retrieve orders placed by a single user
+        orders = Order.query.filter_by(user_id=user_id).all()
+        if not orders:
+            return {'message': 'No orders found for this user'}, 404
+        order_list = []
+        for order in orders:
+            order_data = {
+                'id': order.id,
+                'quantity': order.quantity,
+                'time': order.time,
+                'delivery_status': order.delivery_status,
+                'user_id': order.user_id,
+                'food_id': order.food_id
+            }
+            order_list.append(order_data)
+        return {'orders': order_list}, 200
 
 class OrderByIDUser(Resource):
     # Orders a single user has placed

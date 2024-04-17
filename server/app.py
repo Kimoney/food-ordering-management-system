@@ -18,14 +18,6 @@ db.init_app(app)
 
 api = Api(app)
 
-@app.route('/')
-def index():
-    resp = make_response({
-        'project': 'Food Ordering Management System',
-        'authors': ['John Kimani, Moses Letting, Dennis Kipkirui, Kelvin Kuria']
-        }, 200)
-    return resp
-
 @app.before_request
 def check_if_logged_in():
     allowed_user_endpoints = ['indexuser', 'foodbyiduser', 'foodbyidcategoryuser', 'ordersuser', 'orderbyiduser', 'logout', 'checksession']
@@ -39,11 +31,38 @@ def check_if_logged_in():
             if request.endpoint not in allowed_admin_endpoints:
                 return {'error': 'Unauthorized for 3this role'}, 401
     else:
-        if request.endpoint not in ['checksession','logout', 'login']:
+        if request.endpoint not in ['checksession','logout', 'login', 'home', 'register']:
             return {'error': 'Unauthorized Log In First'}, 401
 
 # Authentication
 # Session Checker
+
+class MainHome(Resource):
+
+    def get(self):
+        resp = make_response({
+            'project': 'Food Ordering Management System',
+            'authors': ['John Kimani, Moses Letting, Dennis Kipkirui, Kelvin Kuria']
+            }, 200)
+        return resp
+    
+class Register(Resource):
+
+    def post(self):
+
+        data = request.get_json()
+        if data:
+            full_name = request.get_json()['full_name']
+            username = request.get_json()['username']
+            password = request.get_json()['password']
+
+            new_user = User(full_name=full_name, username=username, password_hash=password)
+            db.session.add(new_user)
+            db.session.commit()
+            resp = {'message': f'Congratulations {full_name}! Successfully Registered'}
+            return make_response(resp, 201)
+        else:
+            return make_response({'message': 'All fields have to be filled'}, 401)
 class CheckSession(Resource):
 
     def get(self):
@@ -73,7 +92,13 @@ class Login(Resource):
                 user.authenticate(password)
                 session['user_id'] = user.id
                 session['user_role_admin'] = user.is_admin
-                return make_response({}, 200)
+                user_dict = {
+                'id': user.id,
+                'full_name': user.full_name,
+                'username': user.username,
+                'is_admin': user.is_admin,
+            }
+                return make_response(user_dict, 200)
             else:
                 return make_response({'error': 'Invalid username or password'}, 401)
 
@@ -84,7 +109,7 @@ class Logout(Resource):
         session['user_id'] = None
         session['user_role_admin'] = None
         return {'message': '204: No Content'}, 204
-    
+
  
 class IndexUser(Resource):
 # View all foods for the user's home/index page
@@ -179,9 +204,11 @@ class OrderByIdAdmin(Resource):
 
 # Endpoints
 
+api.add_resource(MainHome, '/', endpoint='home')
 api.add_resource(Login, '/login', endpoint='login')
 api.add_resource(CheckSession, '/check_session', endpoint='checksession')     
 api.add_resource(Logout, '/logout', endpoint='logout')
+api.add_resource(Register, '/register', endpoint='register')
 api.add_resource(IndexUser, '/foods', endpoint='indexuser')
 api.add_resource(FoodByIdUser, '/foods/<int:id>', endpoint='foodbyiduser')
 api.add_resource(FoodByIdCategoryUser, '/foods/<string:category>', endpoint='foodbyidcategoryuser')

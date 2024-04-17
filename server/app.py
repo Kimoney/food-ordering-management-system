@@ -79,10 +79,9 @@ class FoodByIdCategoryUser(Resource):
         return {'foods': food_list}, 200
 
 class OrdersUser(Resource):
-    # Orders a single user has placed
-    def get(self, user_id):
+    def get(self, id):
         # Retrieve orders placed by a single user
-        orders = Order.query.filter_by(user_id=user_id).all()
+        orders = Order.query.filter_by(user_id=id).all()
         if not orders:
             return {'message': 'No orders found for this user'}, 404
         order_list = []
@@ -96,21 +95,21 @@ class OrdersUser(Resource):
                 'food_id': order.food_id
             }
             order_list.append(order_data)
-        return {'orders': order_list}, 200
+        return make_response(jsonify({'orders': order_list}, 200))
 
-class OrderByIDUser(Resource):
-    # Orders a single user has placed
-    def get(self, user_id):
-        orders = Order.query.filter_by(user_id=user_id).order_by(Order.id.asc()).all()
-        orders_list = [{
-            'id': order.id,
-            'quantity': order.quantity,
-            'time': order.time,
-            'delivery_status': order.delivery_status,
-            'user_id': order.user_id,
-            'food_id': order.food_id
-        } for order in orders]
-        return make_response(jsonify({'orders': orders_list}), 200)
+# class OrderByIDUser(Resource):
+#     # Orders a single user has placed
+#     def get(self, user_id):
+#         orders = Order.query.filter_by(user_id=user_id).order_by(Order.id.asc()).all()
+#         orders_list = [{
+#             'id': order.id,
+#             'quantity': order.quantity,
+#             'time': order.time,
+#             'delivery_status': order.delivery_status,
+#             'user_id': order.user_id,
+#             'food_id': order.food_id
+#         } for order in orders]
+#         return make_response(jsonify({'orders': orders_list}), 200)
 
 class IndexAdmin(Resource):
     # View All food as the Admin and perform all CRUD operations
@@ -295,16 +294,16 @@ class OrderByIdAdmin(Resource):
     def get(self, id):
         order = Order.query.filter_by(id=id).first()
         if order:
-            return jsonify({
+            return make_response(jsonify({
                 'id': order.id,
                 'quantity': order.quantity,
                 'time': order.time,
                 'delivery_status': order.delivery_status,
                 'user_id': order.user_id,
                 'food_id': order.food_id
-            }), 200
+            }), 200)
         else:
-            return jsonify({'message': 'Order not found'}), 404
+            return make_response(jsonify({'message': 'Order not found'}), 404)
 
     def patch(self, id):
         order_to_update = Order.query.filter_by(id=id).first()
@@ -314,26 +313,26 @@ class OrderByIdAdmin(Resource):
         db.session.add(order_to_update)
         db.session.commit()
 
-        return jsonify({
+        return make_response(jsonify({
             'id': order_to_update.id,
             'quantity': order_to_update.quantity,
             'time': order_to_update.time,
             'delivery_status': order_to_update.delivery_status,
             'user_id': order_to_update.user_id,
             'food_id': order_to_update.food_id
-        }), 200
+        }), 200)
 
     def delete(self, id):
         order_to_delete = Order.query.filter_by(id=id).first()
         db.session.delete(order_to_delete)
         db.session.commit()
-        return jsonify({'message': 'order successfully deleted'}), 200
+        return make_response(jsonify({'message': 'order successfully deleted'}), 200)
 
 api.add_resource(IndexUser, '/foods')
 api.add_resource(FoodByIdUser, '/foods/<int:id>')
 api.add_resource(FoodByIdCategoryUser, '/foods/<string:category>')
-api.add_resource(OrdersUser, '/orders')
-api.add_resource(OrderByIDUser, '/orders/<int:id>')
+api.add_resource(OrdersUser, '/orders/<int:id>')
+# api.add_resource(OrderByIDUser, '/orders/<int:id>')
 api.add_resource(IndexAdmin, '/admin/foods')
 api.add_resource(FoodByIdAdmin, '/admin/foods/<int:id>')
 api.add_resource(FoodByIdCategoryAdmin, '/admin/foods/<string:category>')

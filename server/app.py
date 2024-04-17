@@ -167,7 +167,74 @@ class FoodByIdAdmin(Resource):
 
 class FoodByIdCategoryAdmin(Resource):
     # View several foods based on their category as the Admin and handles all CRUD operations
-    pass
+    def get(self, category):
+        # Retrieve foods based on category
+        foods = Food.query.filter_by(category=category).all()
+        if not foods:
+            return {'message': 'No foods found in this category'}, 404
+        food_list = []
+        for food in foods:
+            food_data = {
+                'id': food.id,
+                'name': food.name,
+                'category': food.category,
+                'price': food.price,
+                'description': food.description,
+                'image': food.image
+            }
+            food_list.append(food_data)
+        return {'foods': food_list}, 200
+
+    def post(self, category):
+        # Create a new food in the specified category
+        data = request.form
+        new_food = Food(
+            name=data['name'],
+            category=category,
+            price=data['price'],
+            description=data['description'],
+            image=data['image']
+        )
+        db.session.add(new_food)
+        db.session.commit()
+        return {'message': 'Food created successfully', 'food': {
+            'id': new_food.id,
+            'name': new_food.name,
+            'category': new_food.category,
+            'price': new_food.price,
+            'description': new_food.description,
+            'image': new_food.image
+        }}, 201
+
+    def patch(self,food_id):
+        # Update an existing food
+        food = Food.query.get(food_id)
+        if not food:
+            return {'message': 'Food not found'}, 404
+
+        data = request.form
+        food.name = data.get('name', food.name)
+        food.price = data.get('price', food.price)
+        food.description = data.get('description', food.description)
+        food.image = data.get('image', food.image)
+        db.session.commit()
+        return {'message': 'Food updated successfully', 'food': {
+            'id': food.id,
+            'name': food.name,
+            'category': food.category,
+            'price': food.price,
+            'description': food.description,
+            'image': food.image
+        }}, 200
+
+    def delete(self,food_id):
+        # Delete a food
+        food = Food.query.get(food_id)
+        if not food:
+            return {'message': 'Food not found'}, 404
+        db.session.delete(food)
+        db.session.commit()
+        return {'message': 'Food deleted successfully'}, 200
 
 class AllOrdersAdmin(Resource):
     # Shows all orders as the Admin and handles all CRUD operations

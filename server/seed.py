@@ -2,6 +2,7 @@ from models import db, User, Food, Order
 from app import app
 from faker import Faker
 from faker_food import FoodProvider
+# from fooddata import FoodProvider
 
 fake = Faker()
 fake.add_provider(FoodProvider)

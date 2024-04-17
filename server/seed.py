@@ -17,7 +17,7 @@ with app.app_context():
 
     # Populate User table
     for x in range(10):
-        user = User(username=fake.name(), password_hash=fake.word())
+        user = User(full_name=fake.name(), username=fake.word() , password_hash=fake.word())
         db.session.add(user)
         db.session.commit()
     print('Populated User table')
@@ -38,3 +38,9 @@ with app.app_context():
         db.session.add(order)
         db.session.commit()
     print('Populated Orders table')
+
+    db.session.add(User(full_name='John Kimani', username='admin' , password_hash='admin', is_admin=True))
+    db.session.commit()
+
+    db.session.add(User(full_name='Something Doe', username='user' , password_hash='user'))
+    db.session.commit()

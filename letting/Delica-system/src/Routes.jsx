@@ -1,40 +1,27 @@
 import React from "react";
-import { useRoutes } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "pages/Home";
 import NotFound from "pages/NotFound";
 import Register from "pages/Register";
 import Customers from "pages/Customers";
 import Landingpage from "pages/Landingpage";
 import Products from "pages/Products";
-import AboutUs from "pages/AboutUs";
+import AboutUsPage from "pages/AboutUs";
 
-const ProjectRoutes = () => {
-  let element = useRoutes([
-    { path: "/", element: <Home /> },
-    { path: "*", element: <NotFound /> },
-    {
-      path: "register",
-      element: <Register />,
-    },
-    {
-      path: "customers",
-      element: <Customers />,
-    },
-    {
-      path: "landingpage",
-      element: <Landingpage />,
-    },
-    {
-      path: "products",
-      element: <Products />,
-    },
-    {
-      path: "aboutus",
-      element: <AboutUs />,
-    },
-  ]);
+function PRoutes() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Landingpage />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/customers" element={<Customers />} />
 
-  return element;
-};
+        <Route path="/products" element={<Products />} />
+        <Route path="/aboutus" element={<AboutUsPage />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Router>
+  );
+}
 
-export default ProjectRoutes;
+export default PRoutes;

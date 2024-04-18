@@ -6,26 +6,45 @@ import Header from "../../components/Header";
 
 const data = [
   {
-    descriptiontext: "The Food is so delicious and crunchy, i recommend Delica to anyone who love a taste of good food",
+    descriptiontext:
+      "The Food is so delicious and crunchy, i recommend Delica to anyone who love a taste of good food",
     nametext: "Johnson White",
     roletext: "customer",
   },
   {
-    descriptiontext: "The Food is so delicious and crunchy, i recommend Delica to anyone who love a taste of good food",
+    descriptiontext:
+      "The Food is so delicious and crunchy, i recommend Delica to anyone who love a taste of good food",
     nametext: "Johnson White",
     roletext: "customer",
   },
   {
-    descriptiontext: "The Food is so delicious and crunchy, i recommend Delica to anyone who love a taste of good food",
+    descriptiontext:
+      "The Food is so delicious and crunchy, i recommend Delica to anyone who love a taste of good food",
     nametext: "Johnson White",
     roletext: "customer",
   },
 ];
 const data1 = [
-  { imageone: "images/img_fernando_andrad.png", pizza: "Pizza", kshCounter: "ksh. 600" },
-  { imageone: "images/img_fernando_andrad_200x198.png", pizza: "Hambuger", kshCounter: "Ksh.450" },
-  { imageone: "images/img_fernando_andrad_1.png", pizza: "Fries", kshCounter: "Ksh. 200" },
-  { imageone: "images/img_fernando_andrad_2.png", pizza: "Chicken", kshCounter: "Ksh. 750" },
+  {
+    imageone: "images/img_fernando_andrad.png",
+    pizza: "Pizza",
+    kshCounter: "ksh. 600",
+  },
+  {
+    imageone: "images/img_fernando_andrad_200x198.png",
+    pizza: "Hambuger",
+    kshCounter: "Ksh.450",
+  },
+  {
+    imageone: "images/img_fernando_andrad_1.png",
+    pizza: "Fries",
+    kshCounter: "Ksh. 200",
+  },
+  {
+    imageone: "images/img_fernando_andrad_2.png",
+    pizza: "Chicken",
+    kshCounter: "Ksh. 750",
+  },
 ];
 
 export default function LandingpagePage() {
@@ -46,15 +65,26 @@ export default function LandingpagePage() {
           <div>
             <div className="flex items-center justify-between gap-5 bg-white-A700 p-6 md:flex-col sm:p-5">
               <div className="ml-12 flex w-[48%] flex-col items-start gap-[29px] md:ml-0 md:w-full">
-                <Heading size="3xl" as="h1" className="!font-inriasans !font-bold">
+                <Heading
+                  size="3xl"
+                  as="h1"
+                  className="!font-inriasans !font-bold"
+                >
                   <span className="text-black-900">Delica</span>
                   <span className="text-red-600">. Foods</span>
                 </Heading>
-                <Heading as="h2" className="!font-inriasans leading-[120%] tracking-[-0.32px]">
-                  This is a website for a fictional company that develops app that provides features and services for
-                  its users
+                <Heading
+                  as="h2"
+                  className="!font-inriasans leading-[120%] tracking-[-0.32px]"
+                >
+                  This is a website for a fictional company that develops app
+                  that provides features and services for its users
                 </Heading>
-                <Button size="sm" shape="round" className="w-full font-inriasans font-bold sm:px-5">
+                <Button
+                  size="sm"
+                  shape="round"
+                  className="w-full font-inriasans font-bold sm:px-5"
+                >
                   Get Your order now
                 </Button>
               </div>
@@ -100,16 +130,26 @@ export default function LandingpagePage() {
                 </div>
                 <div className="relative mt-[-232px] flex flex-col">
                   <div className="relative z-[5] flex w-[50%] flex-col items-start md:w-full">
-                    <Heading size="4xl" as="h3" className="text-center !text-red-600">
+                    <Heading
+                      size="4xl"
+                      as="h3"
+                      className="text-center !text-red-600"
+                    >
                       About Us
                     </Heading>
-                    <Heading size="3xl" as="h4" className="mt-3 capitalize leading-[58px] !text-gray-900_01">
+                    <Heading
+                      size="3xl"
+                      as="h4"
+                      className="mt-3 capitalize leading-[58px] !text-gray-900_01"
+                    >
                       order From Anywhere anytime.
                     </Heading>
                     <Text as="p" className="mt-5 leading-[26px] !text-gray-900">
-                      Delica is A Digital Restaurant that you can order The Four Delicious Foods that consist of a
-                      pizza, a burger, Fries and Chicken, and we have patnered with Uber that will deliver it to your
-                      door step. we are dedicate din serving your apetite and building the economy
+                      Delica is A Digital Restaurant that you can order The Four
+                      Delicious Foods that consist of a pizza, a burger, Fries
+                      and Chicken, and we have patnered with Uber that will
+                      deliver it to your door step. we are dedicate din serving
+                      your apetite and building the economy
                     </Text>
                     <Button
                       size="sm"
@@ -134,7 +174,11 @@ export default function LandingpagePage() {
                       />
                     </div>
                     <div className="relative mt-[-20px] flex flex-col items-center gap-[74px] bg-white-A700 p-[23px] md:gap-[55px] sm:gap-[37px] sm:p-5">
-                      <Heading size="2xl" as="h5" className="!font-montserrat !text-red-600">
+                      <Heading
+                        size="2xl"
+                        as="h5"
+                        className="!font-montserrat !text-red-600"
+                      >
                         Our Food
                       </Heading>
                       <div className="mb-6 flex gap-[35px] self-stretch md:flex-col">
@@ -143,13 +187,25 @@ export default function LandingpagePage() {
                             key={"listpizza" + index}
                             className="flex w-full flex-col items-start gap-[13px] bg-white-A700 p-6 shadow-sm sm:p-5"
                           >
-                            <Img src="images/img_teenyicons_star_solid.svg" alt="image" className="h-[15px] w-[15px]" />
+                            <Img
+                              src="images/img_teenyicons_star_solid.svg"
+                              alt="image"
+                              className="h-[15px] w-[15px]"
+                            />
                             <Text as="p" className="!text-black-900_7f">
                               4.5
                             </Text>
-                            <Img src={d.imageone} alt="image_one" className="h-[200px] w-full object-cover md:h-auto" />
+                            <Img
+                              src={d.imageone}
+                              alt="image_one"
+                              className="h-[200px] w-full object-cover md:h-auto"
+                            />
                             <div className="flex flex-col items-start gap-[13px] self-stretch">
-                              <Text size="lg" as="p" className="!text-black-900">
+                              <Text
+                                size="lg"
+                                as="p"
+                                className="!text-black-900"
+                              >
                                 {d.pizza}
                               </Text>
                               <Text as="p" className="!text-black-900_7f">
@@ -158,7 +214,10 @@ export default function LandingpagePage() {
                               <Heading as="h6" className="!font-extrabold">
                                 {d.kshCounter}
                               </Heading>
-                              <Button shape="round" className="w-full !rounded-[10px] sm:px-5">
+                              <Button
+                                shape="round"
+                                className="w-full !rounded-[10px] sm:px-5"
+                              >
                                 Order now
                               </Button>
                             </div>
@@ -174,7 +233,11 @@ export default function LandingpagePage() {
 
             {/* customer reviews section */}
             <div className="relative z-[1] mt-[-1px] flex flex-col items-center px-[395px] md:px-5">
-              <Heading size="2xl" as="h1" className="text-center !font-montserrat !text-red-600">
+              <Heading
+                size="2xl"
+                as="h1"
+                className="text-center !font-montserrat !text-red-600"
+              >
                 Customer reviews
               </Heading>
             </div>
@@ -276,19 +339,38 @@ export default function LandingpagePage() {
             </div>
           </div>
           <div className="flex items-center justify-between gap-5 bg-gray-900_02 px-12 pt-12 md:px-5 md:pt-5 sm:flex-col">
-            <Heading as="h6" className="ml-16 mt-[3px] self-start !text-blue_gray-300 md:ml-0">
+            <Heading
+              as="h6"
+              className="ml-16 mt-[3px] self-start !text-blue_gray-300 md:ml-0"
+            >
               © 2024 Delica. Foods. All rights reserved.
             </Heading>
             <div className="mr-16 flex w-[18%] justify-between gap-5 md:mr-0 sm:w-full">
-              <Img src="images/img_social_icon.png" alt="socialicon_one" className="h-px object-cover" />
-              <Img src="images/img_vector.png" alt="vector_one" className="h-px object-cover" />
-              <Img src="images/img_social_icon_blue_gray_300.png" alt="socialicon" className="h-px object-cover" />
+              <Img
+                src="images/img_social_icon.png"
+                alt="socialicon_one"
+                className="h-px object-cover"
+              />
+              <Img
+                src="images/img_vector.png"
+                alt="vector_one"
+                className="h-px object-cover"
+              />
+              <Img
+                src="images/img_social_icon_blue_gray_300.png"
+                alt="socialicon"
+                className="h-px object-cover"
+              />
               <Img
                 src="images/img_social_icon_blue_gray_300_1x24.png"
                 alt="socialicon_five"
                 className="h-px object-cover"
               />
-              <Img src="images/img_vector_blue_gray_300.png" alt="vector_three" className="h-px object-cover" />
+              <Img
+                src="images/img_vector_blue_gray_300.png"
+                alt="vector_three"
+                className="h-px object-cover"
+              />
             </div>
           </div>
         </footer>

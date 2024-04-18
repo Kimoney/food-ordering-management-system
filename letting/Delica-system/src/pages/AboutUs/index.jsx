@@ -25,13 +25,19 @@ export default function AboutUsPage() {
               <Heading size="4xl" as="h1" className="text-center !text-red-600">
                 About Us
               </Heading>
-              <Heading size="3xl" as="h2" className="mt-3 capitalize leading-[58px] !text-gray-900_01">
+              <Heading
+                size="3xl"
+                as="h2"
+                className="mt-3 capitalize leading-[58px] !text-gray-900_01"
+              >
                 order From Anywhere anytime.
               </Heading>
               <Text as="p" className="mt-5 leading-[26px] !text-gray-900">
-                Delica is A Digital Restaurant that you can order The Four Delicious Foods that consist of a pizza, a
-                burger, Fries and Chicken, and we have patnered with Uber that will deliver it to your door step. we are
-                dedicate din serving your apetite and building the economy
+                Delica is A Digital Restaurant that you can order The Four
+                Delicious Foods that consist of a pizza, a burger, Fries and
+                Chicken, and we have patnered with Uber that will deliver it to
+                your door step. we are dedicate din serving your apetite and
+                building the economy
               </Text>
               <Button
                 size="sm"

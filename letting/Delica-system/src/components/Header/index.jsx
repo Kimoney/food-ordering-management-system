@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import { Button, Heading } from "./..";
 
 export default function Header({ ...props }) {
@@ -15,37 +16,44 @@ export default function Header({ ...props }) {
         <div className="flex w-[46%] items-center justify-between gap-5 pl-5 md:w-full sm:flex-col">
           <ul className="flex flex-wrap gap-[52px] md:gap-5">
             <li>
-              <a href="#">
+              <NavLink to="/" activeClassName="active">
                 <Heading as="h6" className="!font-inriasans !text-black-900_7f">
                   Home
                 </Heading>
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href="#">
+              <NavLink to="/products" activeClassName="active">
                 <Heading as="h6" className="!font-inriasans !text-black-900_7f">
                   Products
                 </Heading>
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href="#">
+              <NavLink to="/customers" activeClassName="active">
                 <Heading as="h6" className="!font-inriasans !text-black-900_7f">
                   Customers
                 </Heading>
-              </a>
+              </NavLink>
             </li>
             <li>
-              <a href="#">
+              <NavLink to="/aboutus" activeClassName="active">
                 <Heading as="h6" className="!font-inriasans !text-black-900_7f">
                   About Us
                 </Heading>
-              </a>
+              </NavLink>
             </li>
           </ul>
-          <Button color="black_900" size="sm" shape="round" className="min-w-[80px] font-inriasans font-bold">
-            Login
-          </Button>
+          <NavLink to="/register" activeClassName="active">
+            <Button
+              color="black_900"
+              size="sm"
+              shape="round"
+              className="min-w-[80px] font-inriasans font-bold"
+            >
+              Register
+            </Button>
+          </NavLink>
         </div>
       </div>
     </header>

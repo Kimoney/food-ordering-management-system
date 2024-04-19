@@ -1,4 +1,5 @@
 {
+  "proxy": "http://127.0.0.1:5000",
   "name": "delica",
   "version": "0.1.0",
   "private": true,
@@ -19,7 +20,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "start": "vite",
+    "start": "PORT=5173 vite",
     "build": "vite build",
     "serve": "vite preview"
   },
@@ -46,8 +47,8 @@
     "autoprefixer": "10.4.2",
     "postcss": "8.4.8",
     "prop-types": "^15.8.1",
-    "tailwindcss": "3.0.18",
-    "vite": "^4.5.3",
+    "tailwindcss": "^3.0.18",
+    "vite": "^5.2.9",
     "vite-tsconfig-paths": "3.6.0"
   }
 }

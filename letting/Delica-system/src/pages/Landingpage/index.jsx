@@ -14,13 +14,13 @@ const data = [
   {
     descriptiontext:
       "The Food is so delicious and crunchy, i recommend Delica to anyone who love a taste of good food",
-    nametext: "Johnson White",
+    nametext: "John Kimani",
     roletext: "customer",
   },
   {
     descriptiontext:
       "The Food is so delicious and crunchy, i recommend Delica to anyone who love a taste of good food",
-    nametext: "Johnson White",
+    nametext: "Dennis Kipkirui",
     roletext: "customer",
   },
 ];

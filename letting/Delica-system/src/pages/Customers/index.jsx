@@ -7,18 +7,21 @@ import Header from "../../components/Header";
 
 const data = [
   {
-    descriptiontext: "The Food is so delicious and crunchy, i recommend Delica to anyone who love a taste of good food",
+    descriptiontext:
+      "The Food is so delicious and crunchy, i recommend Delica to anyone who love a taste of good food",
     nametext: "Johnson White",
     roletext: "customer",
   },
   {
-    descriptiontext: "The Food is so delicious and crunchy, i recommend Delica to anyone who love a taste of good food",
-    nametext: "Johnson White",
+    descriptiontext:
+      "The Food is so delicious and crunchy, i recommend Delica to anyone who love a taste of good food",
+    nametext: "Dennis Kipkirui",
     roletext: "customer",
   },
   {
-    descriptiontext: "The Food is so delicious and crunchy, i recommend Delica to anyone who love a taste of good food",
-    nametext: "Johnson White",
+    descriptiontext:
+      "The Food is so delicious and crunchy, i recommend Delica to anyone who love a taste of good food",
+    nametext: "John Kimani",
     roletext: "customer",
   },
 ];
@@ -39,7 +42,11 @@ export default function CustomersPage() {
 
         {/* customer reviews section */}
         <div className="container-xs mt-[81px] flex flex-col items-center gap-[38px] md:p-5">
-          <Heading size="2xl" as="h1" className="text-center !font-montserrat !text-red-600">
+          <Heading
+            size="2xl"
+            as="h1"
+            className="text-center !font-montserrat !text-red-600"
+          >
             Customer reviews
           </Heading>
           <div className="flex gap-[61px] self-stretch bg-white-A700 p-[11px] md:flex-col">

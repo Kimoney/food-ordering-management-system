@@ -26,16 +26,13 @@ def check_if_logged_in():
     if session.get('user_id'):
         if session.get('user_role_admin') != True:
             if request.endpoint not in allowed_user_endpoints:
-                return {'error': 'Unauthorized for 2this role'}, 401
+                return {'error': 'Unauthorized To Access This Resource'}, 401
         else:
             if request.endpoint not in allowed_admin_endpoints:
-                return {'error': 'Unauthorized for 3this role'}, 401
+                return {'error': 'Unauthorized To Access This Resource'}, 401
     else:
         if request.endpoint not in ['checksession','logout', 'login', 'home', 'register']:
             return {'error': 'Unauthorized Log In First'}, 401
-
-# Authentication
-# Session Checker
 
 class MainHome(Resource):
 
@@ -45,7 +42,7 @@ class MainHome(Resource):
             'authors': ['John Kimani, Moses Letting, Dennis Kipkirui, Kelvin Kuria']
             }, 200)
         return resp
-    
+
 class Register(Resource):
 
     def post(self):
@@ -77,7 +74,7 @@ class CheckSession(Resource):
             return make_response(user_dict, 200)
         else:
             return {'message': '401: Not Authorized'}, 401
-# Log In
+        
 class Login(Resource):
 
     def post(self):
@@ -90,6 +87,7 @@ class Login(Resource):
             
             if user:
                 user.authenticate(password)
+                print(user.authenticate(password))
                 session['user_id'] = user.id
                 session['user_role_admin'] = user.is_admin
                 user_dict = {
@@ -102,7 +100,6 @@ class Login(Resource):
             else:
                 return make_response({'error': 'Invalid username or password'}, 401)
 
-# Log Out
 class Logout(Resource):
 
     def delete(self):

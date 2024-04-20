@@ -44,12 +44,13 @@ import Customers from "pages/Customers";
 import Landingpage from "pages/Landingpage";
 import Products from "pages/Products";
 import AboutUsPage from "pages/AboutUs";
+import Login from "pages/Login";
 
 function PRoutes() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    fetch(" http://127.0.0.1:5000/check_session").then((response) => {
+    fetch("/check_session").then((response) => {
       if (response.ok) {
         response.json().then((user) => setUser(user));
       }
@@ -60,6 +61,7 @@ function PRoutes() {
     <Router>
       <Routes>
         <Route path="/" element={<Landingpage />} />
+        <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register onLogin={setUser} />} />
         <Route path="/customers" element={<Customers />} />
 

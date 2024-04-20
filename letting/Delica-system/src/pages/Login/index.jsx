@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
+import { redirect } from 'react-router-dom';
 import { Text, Button, Input, Img, Heading } from "../../components";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
@@ -7,7 +8,7 @@ import Header from "../../components/Header";
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [fullname, setFullname] = useState('');
+  const [error, setError] = useState('');
 
   const myStyles = {
     padding: '10px',
@@ -18,15 +19,23 @@ export default function Login() {
   function handleSubmit(e) {
     e.preventDefault();
     console.log(username)
-    fetch("http://127.0.0.1:5555/register", {
+    fetch("http://127.0.0.1:5555/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ full_name:fullname, username:username, password:password }),
+      body: JSON.stringify({ username:username, password:password }),
     })
       .then((r) => r.json())
-      .then(data => console.log(data));
+      .then(data => {
+        console.log(data)
+        if(data.hasOwnProperty('username')){
+            console.log(data)
+            return redirect("/");
+        } else {
+            setError("Invalid username or password")
+        }
+    });
   }
 
   return (
@@ -64,28 +73,27 @@ export default function Login() {
           <div className="flex flex-1 flex-col items-start gap-7 bg-white-A700 p-10 md:self-stretch sm:p-5">
             {/* <a href="Register" target="_blank" rel="noreferrer" className="ml-[110px] md:ml-0"> */}
               <Heading size="lg" as="h2" className="!font-montserrat">
-                Sign Up
+                Log In
               </Heading>
+              <Text as="p" className="!text-gray-800">
+                {error}
+              </Text>
             {/* </a> */}
-      <form onSubmit={handleSubmit}> 
-          <div className="flex w-[51%] flex-col gap-3 self-center md:w-full">
-            <div className="flex flex-col items-start gap-[5px]">
-                <Text as="p" className="!text-gray-800">
-                  Full Name
-                </Text>
-                <input
-                    style={myStyles}
-                    type="text"
-                    id="fullname"
-                    placeholder="Full Name"
-                    value={fullname}
-                    onChange={(e) => setFullname(e.target.value)}
-              />
-              </div>
+            <form onSubmit={handleSubmit}> 
+            <div className="flex w-[51%] flex-col gap-3 self-center md:w-full">
               <div className="flex flex-col items-start gap-[5px]">
                 <Text as="p" className="!text-gray-800">
                   Username
                 </Text>
+                {/* <Input
+                  shape="round"
+                  type="text"
+                  name="userName"
+                  placeholder={`Username`}
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  className="sm:pr-5"
+                /> */}
                 <input
                     style={myStyles}
                     type="text"
@@ -99,17 +107,26 @@ export default function Login() {
                 <Text as="p" className="!text-gray-800">
                   Password
                 </Text>
+                {/* <Input
+                  shape="round"
+                  type="password"
+                  name="password"
+                  placeholder={`Password`}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  suffix={<Img src="images/img_eye.svg" alt="eye" className="h-[16px] w-[16px]" />}
+                  className="gap-[35px]"
+                /> */}
                 <input
                     style={myStyles}
                     type="password"
                     id="password"
-                    placeholder="********"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
               <Button color="deep_orange_600" shape="round" className="w-full !rounded-[10px] sm:px-5">
-                Sign Up
+                Login
               </Button>
             </div>
             </form>
